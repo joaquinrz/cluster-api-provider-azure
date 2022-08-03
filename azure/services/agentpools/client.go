@@ -91,7 +91,7 @@ func (ac *AzureClient) Delete(ctx context.Context, resourceGroupName, cluster, n
 	ctx, _, done := tele.StartSpanWithLogger(ctx, "agentpools.AzureClient.Delete")
 	defer done()
 	
-	ignorePodDisruptionBudget := true
+	ignorePodDisruptionBudget := false
 
 	future, err := ac.agentpools.Delete(ctx, resourceGroupName, cluster, name, &ignorePodDisruptionBudget)
 	if err != nil {

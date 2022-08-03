@@ -132,7 +132,7 @@ func (ac *azureClient) DeleteAsync(ctx context.Context, spec azure.ResourceSpecG
 	ctx, _, done := tele.StartSpanWithLogger(ctx, "managedclusters.azureClient.DeleteAsync")
 	defer done()
 	
-	ignorePodDisruptionBudget := true
+	ignorePodDisruptionBudget := false
 	
 	deleteFuture, err := ac.managedclusters.Delete(ctx, spec.ResourceGroupName(), spec.ResourceName(), &ignorePodDisruptionBudget)
 	if err != nil {
