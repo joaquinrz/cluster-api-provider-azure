@@ -22,7 +22,7 @@ import (
 	"net"
 	"time"
 
-	"github.com/Azure/azure-sdk-for-go/services/containerservice/mgmt/2021-05-01/containerservice"
+	"github.com/Azure/azure-sdk-for-go/services/preview/containerservice/mgmt/2022-03-02-preview/containerservice"
 	"github.com/Azure/go-autorest/autorest/to"
 	"github.com/google/go-cmp/cmp"
 	"github.com/pkg/errors"
@@ -57,7 +57,7 @@ type ManagedClusterSpec struct {
 	// LoadBalancerSKU for the managed cluster. Possible values include: 'Standard', 'Basic'. Defaults to Standard.
 	LoadBalancerSKU string
 
-	// NetworkPlugin used for building Kubernetes network. Possible values include: 'azure', 'kubenet'. Defaults to azure.
+	// NetworkPlugin used for building Kubernetes network. Possible values include: 'azure', 'kubenet','none'. Defaults to azure.
 	NetworkPlugin string
 
 	// NetworkPolicy used for building Kubernetes network. Possible values include: 'calico', 'azure'. Defaults to azure.

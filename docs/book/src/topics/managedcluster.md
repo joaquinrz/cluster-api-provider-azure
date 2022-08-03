@@ -101,7 +101,7 @@ spec:
   subscriptionID: 00000000-0000-0000-0000-000000000000 # fake uuid
   version: v1.21.2
   networkPolicy: azure # or calico
-  networkPlugin: azure # or kubenet
+  networkPlugin: azure # or [kubenet,none]
   sku:
     tier: Free # or Paid
 ---
@@ -171,10 +171,10 @@ should be fairly clear from context.
 
 | option                    | available values              |
 |---------------------------|-------------------------------|
-| networkPlugin             | azure, kubenet                |
+| networkPlugin             | azure, kubenet, none          |
 | networkPolicy             | azure, calico                 |
 
-
+Note: Setting the networkPlugin value to `none` will enable the [BYOCNI feature for AKS](https://docs.microsoft.com/en-us/azure/aks/use-byo-cni). For this to work, `networkPolicy` should not be defined.
 ### Multitenancy
 
 Multitenancy for managed clusters can be configured by using `aks-multi-tenancy` flavor. The steps for creating an azure managed identity and mapping it to an `AzureClusterIdentity` are similar to the ones described [here](https://capz.sigs.k8s.io/topics/multitenancy.html).

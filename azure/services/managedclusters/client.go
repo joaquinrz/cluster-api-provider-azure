@@ -20,7 +20,7 @@ import (
 	"context"
 	"encoding/json"
 
-	"github.com/Azure/azure-sdk-for-go/services/containerservice/mgmt/2021-05-01/containerservice"
+	"github.com/Azure/azure-sdk-for-go/services/preview/containerservice/mgmt/2022-03-02-preview/containerservice"
 	"github.com/Azure/go-autorest/autorest"
 	azureautorest "github.com/Azure/go-autorest/autorest/azure"
 	"github.com/pkg/errors"
@@ -131,8 +131,10 @@ func (ac *azureClient) CreateOrUpdateAsync(ctx context.Context, spec azure.Resou
 func (ac *azureClient) DeleteAsync(ctx context.Context, spec azure.ResourceSpecGetter) (future azureautorest.FutureAPI, err error) {
 	ctx, _, done := tele.StartSpanWithLogger(ctx, "managedclusters.azureClient.DeleteAsync")
 	defer done()
-
-	deleteFuture, err := ac.managedclusters.Delete(ctx, spec.ResourceGroupName(), spec.ResourceName())
+	
+	ignorePodDisruptionBudget := true
+	
+	deleteFuture, err := ac.managedclusters.Delete(ctx, spec.ResourceGroupName(), spec.ResourceName(), &ignorePodDisruptionBudget)
 	if err != nil {
 		return nil, err
 	}
