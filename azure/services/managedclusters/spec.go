@@ -329,7 +329,10 @@ func (s *ManagedClusterSpec) Parameters(existing interface{}) (params interface{
 
 		diff := computeDiffOfNormalizedClusters(managedCluster, existingMC)
 		if diff == "" {
+			fmt.Printf("Normalized and desired managed cluster matched, no update needed")
 			return nil, nil
+		} else {
+			fmt.Printf("Update required (+new -old):\n%s", diff)
 		}
 	} else {
 		// Add all agent pools to cluster spec that will be submitted to the API
